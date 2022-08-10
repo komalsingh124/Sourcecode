@@ -1,0 +1,33 @@
+pipeline{
+    agent any
+    tools{
+        maven 'mymaven'
+    }
+    stages{
+        stage("checkout from github repo by simplilearn"){
+        steps{
+        git url: 'https://github.com/akshu20791/DevOpsClassCodes'
+        }
+        }
+        stage("compile"){
+        steps{
+        bat "mvn compile"
+        }
+        }
+       stage("test"){
+        steps{
+        bat "mvn test"
+        }
+       }
+        stage("qa"){
+        steps{
+        bat "mvn pmd:pmd"
+        }
+        }
+        stage("package"){
+        steps{
+        bat "mvn package"
+        }
+        }
+     }
+}
